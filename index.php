@@ -4,33 +4,15 @@
  error_reporting(-1);
  ini_set('display_errors', 1);
 
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/conversion.php';
 
 $supported_language = array('zh' => 'Simplified Chinese', 'zh-Hans' => 'Traditional Chinese', 'ko' => 'Korean', 'hi' => 'Hindi', 'ja' => 'Japanese');
 
 ?>
-<script src="manager.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-function translate1(word) {
-  if (word.length == 0) {
-    document.getElementById("translation0").innerHTML = "";
-    return;
-  } else {
-    $.ajax({
-      type: "POST",
-      url: 'conversion.php',
-      data:{
-        action:'translate',
-        word: word
-      }
-    }).done(function(res) {
-      document.getElementById("translation0").setAttribute("value", res);
-    });
-  }
-}
+<script src="manager.js"></script>
 
-</script>
 <h1>Translation & Conversion</h1>
 
 <form>
