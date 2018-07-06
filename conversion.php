@@ -25,11 +25,18 @@ use \Statickidz\GoogleTranslate;
 
 $target = 'ja';
 $text = 'hello';
+$action = filter_input(INPUT_POST, 'action');
+switch ($action) {
+    case 'translate':
+        $word = filter_input(INPUT_POST, 'word');
+        die(translate($target, $word));
+        break;
+    case 'convert':
+        return unicode_decode();
+        break;
+}
 
-// get the q parameter from URL
-// $q = $_REQUEST["q"];
-
-echo translate($target, $text);
+// echo translate($target, $text);
 
 function translate($target, $text) {
   $trans = new GoogleTranslate();

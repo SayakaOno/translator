@@ -8,38 +8,25 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/conversion.php';
 
 $supported_language = array('zh' => 'Simplified Chinese', 'zh-Hans' => 'Traditional Chinese', 'ko' => 'Korean', 'hi' => 'Hindi', 'ja' => 'Japanese');
 
-
-
 ?>
 <script src="manager.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 function translate1(word) {
   if (word.length == 0) {
     document.getElementById("translation0").innerHTML = "";
     return;
   } else {
-    document.getElementById("translation0").setAttribute("value", "Hello World!");
-
     $.ajax({
-      type: 'POST',
+      type: "POST",
       url: 'conversion.php',
       data:{
         action:'translate',
-      },
-      dataType: 'json',
-    })
-
-
-
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("translation0").setAttribute("value", this.responseText);
-        }
-    };
-    xmlhttp.open("GET", "conversion.php?q=" + word, true);
-    xmlhttp.send();
+        word: word
+      }
+    }).done(function(res) {
+      document.getElementById("translation0").setAttribute("value", res);
+    });
   }
 }
 
