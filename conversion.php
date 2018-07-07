@@ -23,20 +23,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/vendor/autoload.php';
 
 use \Statickidz\GoogleTranslate;
 
-$target = 'ja';
-$text = 'hello';
 $action = filter_input(INPUT_POST, 'action');
 switch ($action) {
     case 'translate':
         $word = filter_input(INPUT_POST, 'word');
+        $target = filter_input(INPUT_POST, 'language0');
         die(translate($target, $word));
         break;
     case 'convert':
         return unicode_decode();
         break;
 }
-
-// echo translate($target, $text);
 
 function translate($target, $text) {
   $trans = new GoogleTranslate();
