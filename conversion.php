@@ -27,7 +27,7 @@ $action = filter_input(INPUT_POST, 'action');
 switch ($action) {
     case 'translate':
         $word = filter_input(INPUT_POST, 'word');
-        $target = filter_input(INPUT_POST, 'language0');
+        $target = filter_input(INPUT_POST, 'language');
         die(translate($target, $word));
         break;
     case 'convert':

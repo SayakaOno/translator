@@ -3,18 +3,28 @@ function translate1(word) {
     document.getElementById("translation0").innerHTML = "";
     return;
   } else {
-    var formData = new FormData();
-    formData.append('language0', $("#language0 :selected").val());
-    formData.append('action','translate');
-    formData.append('word',word);
-    $.ajax({
-      type: "POST",
-      url: 'conversion.php',
-      data:formData,
-      contentType: false,
-      processData: false
-    }).done(function(res) {
-      document.getElementById("translation0").setAttribute("value", res);
-    });
+    var sectionCount = $('#sections .section').length;
+    for (let i=0; i < sectionCount; i++) {
+      var formData = new FormData();
+      var selectedLanguageVal = $("#language" + i + " :selected").val();
+      if (!selectedLanguageVal) continue;
+      formData.append('language', selectedLanguageVal);
+      formData.append('action','translate');
+      formData.append('word', word);
+      $.ajax({
+        type: "POST",
+        url: 'conversion.php',
+        data:formData,
+        contentType: false,
+        processData: false
+      }).done(function(res) {
+        document.getElementById("translation" + i).setAttribute("value", res);
+      });
+    }
   }
+}
+
+function languageSelected(number) {
+  translate1(document.getElementById("word").value);
+  document.getElementById("lan-key" + number).value = document.getElementById("language" + number).value;
 }
