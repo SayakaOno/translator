@@ -27,17 +27,18 @@ $action = filter_input(INPUT_POST, 'action');
 switch ($action) {
     case 'translate':
         $word = filter_input(INPUT_POST, 'word');
-        $target = filter_input(INPUT_POST, 'language');
-        die(translate($target, $word));
+        $original = filter_input(INPUT_POST, 'originalLanguage');
+        $target = filter_input(INPUT_POST, 'targetLanguage');
+        die(translate($original, $target, $word));
         break;
     case 'convert':
         return unicode_decode();
         break;
 }
 
-function translate($target, $text) {
+function translate($original, $target, $text) {
   $trans = new GoogleTranslate();
-  $result = $trans->translate('en', $target, $text);
+  $result = $trans->translate($original, $target, $text);
   return $result;
 }
 

@@ -6,9 +6,11 @@ function translate1(word) {
     var sectionCount = $('#sections .section').length;
     for (let i=0; i < sectionCount; i++) {
       var formData = new FormData();
+      var originalLanguageVal = $("#original-language :selected").val();
       var selectedLanguageVal = $("#language" + i + " :selected").val();
       if (!selectedLanguageVal) continue;
-      formData.append('language', selectedLanguageVal);
+      formData.append('originalLanguage', originalLanguageVal);
+      formData.append('targetLanguage', selectedLanguageVal);
       formData.append('action','translate');
       formData.append('word', word);
       $.ajax({
