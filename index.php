@@ -14,66 +14,91 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
   $userBrowserLanguage = 'en';
 }
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="manager.js"></script>
-<script type="text/javascript">
-    var supported_language = <?php echo json_encode($supported_language); ?>;
-</script>
-<h1>Translation & Conversion</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Translator</title>
+      <link rel="stylesheet" href="style.css">
+      <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="manager.js"></script>
+      <script type="text/javascript">
+          var supported_language = <?php echo json_encode($supported_language); ?>;
+      </script>
+  </head>
 
-<form>
-  <select id="original-language">
-    <?php
-    foreach ($supported_language as $key=>$value) {
-      if ($key == $userBrowserLanguage) {
-        $defaultSetting = " selected";
-      } else {
-        $defaultSetting = "";
-      }
-      echo "<option value='$key' $defaultSetting>$value</option>";
-    }
-   ?>
-  </select>
-  <form>
-    Word: <input id="word" onkeyup="translate1(this.value)"></input>
-  </form>
+  <body>
+    <header>
+      <h1>Translation & Conversion</h1>
+    </header>
+    <main>
+      <!-- <form> -->
+      <section id=inputted>
+        <select id="original-language">
+          <?php
+          foreach ($supported_language as $key=>$value) {
+            if ($key == $userBrowserLanguage) {
+              $defaultSetting = " selected";
+            } else {
+              $defaultSetting = "";
+            }
+            echo "<option value='$key' $defaultSetting>$value</option>";
+          }
+         ?>
+        </select>
+        <!-- <form> -->
+          <dl>Word:</dl><dt><input id="word" onkeyup="translate1(this.value)"></input></dt>
+        <!-- </form> -->
+      </section>
 
-<div id="sections">
+      <div id="sections">
 
-<?php
-  for($i=0; $i<5; $i++) {
- ?>
+      <?php
+        for($i=0; $i<5; $i++) {
+       ?>
 
-  <div class="section">
-    <?php echo "<select id='language" . $i . "' onchange='languageSelected(" . $i .")'>"; ?>
-    <option value="">select language</option>
-    <?php
-    foreach ($supported_language as $key=>$value) {
-    //TODO: when the original language is changed, this should be refreshed.
-      // if ($key == $userBrowserLanguage) continue;
-      echo "<option value='$key'>$value</option>";
-    }
-   ?>
-    </select>
-    <?php echo "<dl>key: </dl><dt><input id='lan-key$i'></input></dt>"; ?>
-    <div>
-      <td>Translation</td>
-      <tl><input id='translation<?php echo $i; ?>'></input></tl>
-    </div>
-    <div>
-      <td>UTF-16</td>
-      <tl><input id='utf-16'></input></tl>
-    </div>
-  </div>
+        <div class="section">
+          <div class="language-key">
+            <?php echo "<select id='language" . $i . "' onchange='languageSelected(" . $i .")'>"; ?>
+            <option value="">select language</option>
+            <?php
+            foreach ($supported_language as $key=>$value) {
+            //TODO: when the original language is changed, this should be refreshed.
+              // if ($key == $userBrowserLanguage) continue;
+              echo "<option value='$key'>$value</option>";
+            }
+           ?>
+            </select>
+              <?php echo "<dl>key: </dl><dt><input id='lan-key$i'></input></dt>"; ?>
+            </div>
+          <div>
+            <td>Translation</td>
+            <tl><input id='translation<?php echo $i; ?>'></input></tl>
+          </div>
+          <!-- <div>
+            <td>UTF-16</td>
+            <tl><input id='utf-16'></input></tl>
+          </div> -->
+          <?php
+            if ($i != 0) {
+              echo '<button id="garbage"' . $i . ' class="garbage"><i class="fas fa-trash-alt"></i>';
+            }
+          ?>
+        </div>
 
-<?php } ?>
+      <?php } ?>
 
-</div>
+      </div>
 
-<button id="convert">CONVERT</button>
+      <button id="convert">CONVERT</button>
 
-<div>
-  <textarea id='code'></textarea>
-</div>
+      <div>
+        <textarea id='code'></textarea>
+      </div>
 
-</form>
+      <!-- </form> -->
+    </main>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+html {
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+  box-sizing: border-box;
+}
+dt, dl {
+  display: inline-block;
+  margin: 0;
+}
+main {
+  max-width: 950px;
+  margin: 0 auto;
+}
+header {
+  text-align: center;
+}
+#sections .section {
+  position: relative;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  background-color: lightyellow;
+}
+#inputted {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.language-key {
+  margin-bottom: 10px;
+}
+.garbage {
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: yellow;
+  cursor: pointer;
+  border: none;
+}
