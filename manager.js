@@ -1,37 +1,32 @@
-function convert() {
+function translate1(word) {
+  if (word.length == 0) {
+    document.getElementById("translation0").innerHTML = "";
+    return;
+  } else {
+    var sectionCount = $('#sections .section').length;
+    for (let i=0; i < sectionCount; i++) {
+      var formData = new FormData();
+      var originalLanguageVal = $("#original-language :selected").val();
+      var selectedLanguageVal = $("#language" + i + " :selected").val();
+      if (!selectedLanguageVal) continue;
+      formData.append('originalLanguage', originalLanguageVal);
+      formData.append('targetLanguage', selectedLanguageVal);
+      formData.append('action','translate');
+      formData.append('word', word);
       $.ajax({
-           type: "POST",
-           url: 'conversion.php',
-           data:{action:'call_this'},
-           success:function(data) {
-             alert(data);
-           }
-
+        type: "POST",
+        url: 'conversion.php',
+        data:formData,
+        contentType: false,
+        processData: false
+      }).done(function(res) {
+        document.getElementById("translation" + i).setAttribute("value", res);
       });
- }
+    }
+  }
+}
 
- function showHint(str) {
-     if (str.length == 0) {
-         document.getElementById("txtHint").innerHTML = "";
-         return;
-     } else {
-         var xmlhttp = new XMLHttpRequest();
-         xmlhttp.onreadystatechange = function() {
-             if (this.readyState == 4 && this.status == 200) {
-                 document.getElementById("txtHint").innerHTML = this.responseText;
-             }
-         };
-         xmlhttp.open("GET", "gethint.php?q=" + str, true);
-         xmlhttp.send();
-     }
- }
-
- function translate1(word) {
-   if (word.length == 0) {
-     document.getElementById("language0").innerHTML = "";
-     return;
-   } else {
-     document.getElementById("language0").innerHTML = "TEST!";
-     return;
-   }
+function languageSelected(number) {
+  translate1(document.getElementById("word").value);
+  document.getElementById("lan-key" + number).value = document.getElementById("language" + number).value;
 }

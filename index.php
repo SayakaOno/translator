@@ -5,65 +5,57 @@
  ini_set('display_errors', 1);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/conversion.php';
-
-$supported_language = array('zh' => 'Simplified Chinese', 'zh-Hans' => 'Traditional Chinese', 'ko' => 'Korean', 'hi' => 'Hindi', 'ja' => 'Japanese');
-
-
-
-?>
-<script src="manager.js"></script>
-<script>
-function translate1(word) {
-  if (word.length == 0) {
-    document.getElementById("translation0").innerHTML = "";
-    return;
-  } else {
-    document.getElementById("translation0").setAttribute("value", "Hello World!");
-
-    $.ajax({
-      type: 'POST',
-      url: 'conversion.php',
-      data:{
-        action:'translate',
-      },
-      dataType: 'json',
-    })
-
-
-
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("translation0").setAttribute("value", this.responseText);
-        }
-    };
-    xmlhttp.open("GET", "conversion.php?q=" + word, true);
-    xmlhttp.send();
-  }
+require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/supported-language.php';
+$userBrowserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : NULL;
+if ($userBrowserLanguage) {
+  $userBrowserLanguage = substr($userBrowserLanguage, 0, strpos($userBrowserLanguage, ','));
 }
-
+if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_language)) {
+  $userBrowserLanguage = 'en';
+}
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="manager.js"></script>
+<script type="text/javascript">
+    var supported_language = <?php echo json_encode($supported_language); ?>;
 </script>
 <h1>Translation & Conversion</h1>
 
 <form>
+  <select id="original-language">
+    <?php
+    foreach ($supported_language as $key=>$value) {
+      if ($key == $userBrowserLanguage) {
+        $defaultSetting = " selected";
+      } else {
+        $defaultSetting = "";
+      }
+      echo "<option value='$key' $defaultSetting>$value</option>";
+    }
+   ?>
+  </select>
   <form>
-    Word: <input onkeyup="translate1(this.value)"></input>
+    Word: <input id="word" onkeyup="translate1(this.value)"></input>
   </form>
-  <button id="convert">CONVERT</button>
+
+<div id="sections">
 
 <?php
-  for($i=0; $i<count($supported_language); $i++) {
+  for($i=0; $i<5; $i++) {
  ?>
 
   <div class="section">
-    <?php echo "<select id='language" . $i . "'>"; ?>
+    <?php echo "<select id='language" . $i . "' onchange='languageSelected(" . $i .")'>"; ?>
+    <option value="">select language</option>
     <?php
     foreach ($supported_language as $key=>$value) {
-      echo "<option value='" . $key . "'>" . $value . "</option>";
+    //TODO: when the original language is changed, this should be refreshed.
+      // if ($key == $userBrowserLanguage) continue;
+      echo "<option value='$key'>$value</option>";
     }
    ?>
     </select>
+    <?php echo "<dl>key: </dl><dt><input id='lan-key$i'></input></dt>"; ?>
     <div>
       <td>Translation</td>
       <tl><input id='translation<?php echo $i; ?>'></input></tl>
@@ -74,11 +66,11 @@ function translate1(word) {
     </div>
   </div>
 
-</div>
-
 <?php } ?>
 
-<button>FORMAT</button>
+</div>
+
+<button id="convert">CONVERT</button>
 
 <div>
   <textarea id='code'></textarea>
