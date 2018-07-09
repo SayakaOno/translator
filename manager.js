@@ -1,9 +1,11 @@
-function translate1(word) {
+function translate1() {
+  var word = document.getElementById("word").value;
   if (word.length == 0) {
-    document.getElementById("translation0").innerHTML = "";
+    alert("Please input word!");
     return;
   } else {
     var sectionCount = $('#sections .section').length;
+    let counter = 0;
     for (let i=0; i < sectionCount; i++) {
       var formData = new FormData();
       var originalLanguageVal = $("#original-language :selected").val();
@@ -22,11 +24,10 @@ function translate1(word) {
       }).done(function(res) {
         document.getElementById("translation" + i).setAttribute("value", res);
       });
+      count++;
+    }
+    if (counter === 0) {
+      alert("Please select language!");
     }
   }
-}
-
-function languageSelected(number) {
-  translate1(document.getElementById("word").value);
-  document.getElementById("lan-key" + number).value = document.getElementById("language" + number).value;
 }
