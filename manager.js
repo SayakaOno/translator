@@ -32,15 +32,8 @@ function languageSelected(number) {
 }
 
 function addSection() {
-  var idNumber = $('#sections .section').length + 1;
+  var idNumber = $('#sections .section').length;
   var sectionClone = $("#section0").clone().attr('id', "section" + idNumber);
-//   var btn = document.createElement("BUTTON");        // Create a <button> element
-//   var t = document.createTextNode("<i class='fas fa-trash-alt'></i>");       // Create a text node
-// btn.appendChild(t);
-// console.log(sectionClone.append(btn));
-// console.log(sectionClone);
-// sectionClone.append(btn);
   var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").appendTo(sectionClone);
   sectionClone.appendTo("#sections");
-  // '<button id="garbage"' . $i . ' class="garbage"><i class="fas fa-trash-alt"></i>'
 }
