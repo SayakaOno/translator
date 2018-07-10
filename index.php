@@ -35,21 +35,24 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
     </header>
     <main>
       <!-- <form> -->
-      <section id=inputted>
-        <select id="original-language">
-          <?php
-          foreach ($supported_language as $key=>$value) {
-            if ($key == $userBrowserLanguage) {
-              $defaultSetting = " selected";
-            } else {
-              $defaultSetting = "";
-            }
-            echo "<option value='$key' $defaultSetting>$value</option>";
-          }
-         ?>
-        </select>
-        <!-- <form> -->
-          <dl>Word:</dl><dt><input id="word" onkeyup="translate1(this.value)"></input></dt>
+        <section id=inputted>
+          <div>
+            <select id="original-language">
+              <?php
+              foreach ($supported_language as $key=>$value) {
+                if ($key == $userBrowserLanguage) {
+                  $defaultSetting = " selected";
+                } else {
+                  $defaultSetting = "";
+                }
+                echo "<option value='$key' $defaultSetting>$value</option>";
+              }
+             ?>
+            </select>
+          <!-- <form> -->
+            <dl>Word:</dl><dt><input id="word"></input></dt>
+          </div>
+          <button id="translate" onclick="translate1()">Translate</button>
         <!-- </form> -->
       </section>
 
