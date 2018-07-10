@@ -24,10 +24,15 @@ function translate1() {
       }).done(function(res) {
         document.getElementById("translation" + i).setAttribute("value", res);
       });
-      count++;
+      counter++;
     }
     if (counter === 0) {
       alert("Please select language!");
     }
   }
+}
+
+function languageSelected(number) {
+  document.getElementById("lan-key" + number).value = document.getElementById("language" + number).value;
+  console.log(document.getElementById("language" + number).value);
 }

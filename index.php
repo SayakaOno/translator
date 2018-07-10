@@ -64,7 +64,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
 
         <div class="section">
           <div class="language-key">
-            <?php echo "<select id='language" . $i . "'>"; ?>
+            <?php echo "<select id='language" . $i . "' onchange='languageSelected(" . $i .")'>"; ?>
             <option value="">select language</option>
             <?php
             foreach ($supported_language as $key=>$value) {
