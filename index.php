@@ -76,7 +76,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             </select>
               <?php echo "<dl>key: </dl><dt><input id='lan-key$i'></input></dt>"; ?>
             </div>
-          <div>
+          <div class="translation">
             <td>Translation</td>
             <tl><input id='translation<?php echo $i; ?>'></input></tl>
           </div>

@@ -41,4 +41,27 @@ function addSection() {
   var sectionClone = $("#section0").clone().attr('id', "section" + idNumber);
   var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").appendTo(sectionClone);
   sectionClone.appendTo("#sections");
+  updateNames();
+}
+
+function updateNames() {
+  $(function(){
+      $('#sections > div').each(function(i){
+          $(this).attr('id', 'section' + i);
+      });
+      $('.language-key > select').each(function(i){
+          $(this).attr('id', 'language' + i).attr('onchange', 'languageSelected(' + i + ')');
+      });
+      $('.language-key input').each(function(i){
+          $(this).attr('id', 'lan-key' + i);
+      });
+      $('.translation input').each(function(i){
+          $(this).attr('id', 'translation' + i);
+      });
+      $('.section button').each(function(i){
+        if (i != 0) {
+          $(this).attr('id', 'garbage' + i);
+        }
+      });
+    })
 }
