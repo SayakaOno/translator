@@ -39,7 +39,7 @@ function languageSelected(number) {
 function addSection() {
   var idNumber = $('#sections .section').length;
   var sectionClone = $("#section0").clone().attr('id', "section" + idNumber);
-  var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").appendTo(sectionClone);
+  var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
   sectionClone.appendTo("#sections");
   updateNames();
 }
@@ -64,4 +64,8 @@ function updateNames() {
         }
       });
     })
+}
+
+function deleteSection(number) {
+  ($('#section' + number)).remove();
 }
