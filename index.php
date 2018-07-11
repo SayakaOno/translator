@@ -58,13 +58,9 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
 
       <div id="sections">
 
-      <?php
-        for($i=0; $i<5; $i++) {
-       ?>
-
-        <div class="section">
+        <div class='section' id='section0'>
           <div class="language-key">
-            <?php echo "<select id='language" . $i . "' onchange='languageSelected(" . $i .")'>"; ?>
+            <select id='language0' onchange='languageSelected(0)'>
             <option value="">select language</option>
             <?php
             foreach ($supported_language as $key=>$value) {
@@ -74,26 +70,21 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             }
            ?>
             </select>
-              <?php echo "<dl>key: </dl><dt><input id='lan-key$i'></input></dt>"; ?>
+              <dl>key: </dl><dt><input id='lan-key0'></input></dt>
             </div>
-          <div>
+          <div class="translation">
             <td>Translation</td>
-            <tl><input id='translation<?php echo $i; ?>'></input></tl>
+            <tl><input id='translation0'></input></tl>
           </div>
           <!-- <div>
             <td>UTF-16</td>
             <tl><input id='utf-16'></input></tl>
           </div> -->
-          <?php
-            if ($i != 0) {
-              echo '<button id="garbage"' . $i . ' class="garbage"><i class="fas fa-trash-alt"></i>';
-            }
-          ?>
         </div>
 
-      <?php } ?>
-
       </div>
+
+      <button id="add-section" onclick="addSection()">Add</button>
 
       <button id="convert">CONVERT</button>
 
