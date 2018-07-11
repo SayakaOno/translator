@@ -58,9 +58,9 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
 
       <div id="sections">
 
-        <?php echo "<div class='section' id='section0'>"; ?>
+        <div class='section' id='section0'>
           <div class="language-key">
-            <?php echo "<select id='language0' onchange='languageSelected(0)'>"; ?>
+            <select id='language0' onchange='languageSelected(0)'>
             <option value="">select language</option>
             <?php
             foreach ($supported_language as $key=>$value) {
@@ -70,7 +70,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             }
            ?>
             </select>
-              <?php echo "<dl>key: </dl><dt><input id='lan-key0'></input></dt>"; ?>
+              <dl>key: </dl><dt><input id='lan-key0'></input></dt>
             </div>
           <div class="translation">
             <td>Translation</td>

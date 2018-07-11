@@ -39,6 +39,8 @@ function languageSelected(number) {
 function addSection() {
   var idNumber = $('#sections .section').length;
   var sectionClone = $("#section0").clone().attr('id', "section" + idNumber);
+  sectionClone.find('#lan-key0').val('');
+  sectionClone.find('#translation0').removeAttr('value');
   var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
   sectionClone.appendTo("#sections");
   updateNames();
@@ -60,7 +62,7 @@ function updateNames() {
       });
       $('.section button').each(function(i){
         if (i != 0) {
-          $(this).attr('id', 'garbage' + i);
+          $(this).attr('id', 'garbage' + i).attr('onclick', 'deleteSection(' + i + ')');
         }
       });
     })
@@ -68,4 +70,5 @@ function updateNames() {
 
 function deleteSection(number) {
   ($('#section' + number)).remove();
+  updateNames();
 }
