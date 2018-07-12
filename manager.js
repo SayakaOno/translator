@@ -18,7 +18,7 @@ function translate1() {
       $.ajax({
         type: "POST",
         url: 'conversion.php',
-        data:formData,
+        data: formData,
         contentType: false,
         processData: false
       }).done(function(res) {
@@ -71,4 +71,29 @@ function updateNames() {
 function deleteSection(number) {
   ($('#section' + number)).remove();
   updateNames();
+}
+
+function convert() {
+  var sectionCount = $('#sections .section').length;
+  let counter = 0;
+  for (let i=0; i < sectionCount; i++) {
+    var formData = new FormData();
+    var translatedWord = $("#translation" + i).val();
+    if (!translatedWord) continue;
+    formData.append('string', translatedWord);
+    formData.append('action','convert');
+    $.ajax({
+      type: "POST",
+      url: 'conversion.php',
+      data: formData,
+      contentType: false,
+      processData: false
+    }).done(function(res) {
+      document.getElementById("utf" + i).setAttribute("value", res);
+    });
+    counter++;
+  }
+  if (counter === 0) {
+    alert("Please translate first!");
+  }
 }

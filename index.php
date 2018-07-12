@@ -50,7 +50,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
              ?>
             </select>
           <!-- <form> -->
-            <dl>Word:</dl><dt><input id="word"></input></dt>
+            <dl>Word:</dl><dt><input id="word"></dt>
           </div>
           <button id="translate" onclick="translate1()">Translate</button>
         <!-- </form> -->
@@ -70,23 +70,23 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             }
            ?>
             </select>
-              <dl>key: </dl><dt><input id='lan-key0'></input></dt>
+              <dl>key: </dl><dt><input id='lan-key0'></dt>
             </div>
           <div class="translation">
             <td>Translation</td>
-            <tl><input id='translation0'></input></tl>
+            <tl><input id='translation0'></tl>
           </div>
-          <!-- <div>
+          <div>
             <td>UTF-16</td>
-            <tl><input id='utf-16'></input></tl>
-          </div> -->
+            <tl><input id='utf0' size="50"></tl>
+          </div>
         </div>
 
       </div>
 
       <button id="add-section" onclick="addSection()">Add</button>
 
-      <button id="convert">CONVERT</button>
+      <button id="convert" onclick="convert()">CONVERT</button>
 
       <div>
         <textarea id='code'></textarea>
