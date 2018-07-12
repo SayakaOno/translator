@@ -4,8 +4,8 @@
  error_reporting(-1);
  ini_set('display_errors', 1);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/conversion.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/supported-language.php';
+require_once 'conversion.php';
+require_once 'supported-language.php';
 $userBrowserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : NULL;
 if ($userBrowserLanguage) {
   $userBrowserLanguage = substr($userBrowserLanguage, 0, strpos($userBrowserLanguage, ','));

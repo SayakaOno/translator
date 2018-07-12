@@ -4,7 +4,7 @@
  error_reporting(-1);
  ini_set('display_errors', 1);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 use \Statickidz\GoogleTranslate;
 
