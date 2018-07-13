@@ -107,3 +107,22 @@ function convert() {
     alert("Please translate first!");
   }
 }
+
+function format() {
+  var sectionCount = $('#sections .section').length;
+  let counter = 0;
+  let response = "";
+  for (let i=0; i < sectionCount; i++) {
+    if ($('#key' + i).val() || $('#utf' + i).val()) {
+      console.log(response);
+      response = response + "'" + $('#lan-key' + i).val() + "': '" + $('#utf' + i).val() + "', ";
+    }
+    counter++;
+  }
+  if (counter === 0) {
+    alert("Please translate & convert first!");
+  } else {
+    response = "{" + response.slice(0, -2) + "}";
+    document.getElementById("code").value = response;
+  }
+}

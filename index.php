@@ -88,8 +88,10 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
 
       <button id="convert" onclick="convert()">CONVERT</button>
 
+      <button id="format" onclick="format()">FORMAT</button>
+
       <div>
-        <textarea id='code'></textarea>
+        <textarea id='code' rows="10" cols="100"></textarea>
       </div>
 
       <!-- </form> -->
