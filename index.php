@@ -76,7 +76,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             <td>Translation</td>
             <tl><input id='translation0'></tl>
           </div>
-          <div>
+          <div class="conversion">
             <td>UTF-16</td>
             <tl><input id='utf0' size="50"></tl>
           </div>

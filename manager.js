@@ -22,7 +22,7 @@ function translate1() {
         contentType: false,
         processData: false
       }).done(function(res) {
-        document.getElementById("translation" + i).setAttribute("value", res);
+        document.getElementById("translation" + i).value = res;
       });
       counter++;
     }
@@ -40,8 +40,11 @@ function addSection() {
   var idNumber = $('#sections .section').length;
   var sectionClone = $("#section0").clone().attr('id', "section" + idNumber);
   sectionClone.find('#lan-key0').val('');
-  sectionClone.find('#translation0').removeAttr('value');
+  sectionClone.find('#translation0').val('');
   var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
+  if (1) {
+    sectionClone.find('#utf0').val('');
+  }
   sectionClone.appendTo("#sections");
   updateNames();
 }
@@ -65,6 +68,13 @@ function updateNames() {
           $(this).attr('id', 'garbage' + i).attr('onclick', 'deleteSection(' + i + ')');
         }
       });
+      if (1) {
+        $('.conversion input').each(function(i){
+          if (i != 0) {
+            $(this).attr('id', 'utf' + i);
+          }
+        });
+      }
     })
 }
 
@@ -89,7 +99,7 @@ function convert() {
       contentType: false,
       processData: false
     }).done(function(res) {
-      document.getElementById("utf" + i).setAttribute("value", res);
+      document.getElementById("utf" + i).value = res;
     });
     counter++;
   }
