@@ -4,8 +4,8 @@
  error_reporting(-1);
  ini_set('display_errors', 1);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/conversion.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/utf16generater/supported-language.php';
+require_once 'conversion.php';
+require_once 'supported-language.php';
 $userBrowserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : NULL;
 if ($userBrowserLanguage) {
   $userBrowserLanguage = substr($userBrowserLanguage, 0, strpos($userBrowserLanguage, ','));
@@ -50,7 +50,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
              ?>
             </select>
           <!-- <form> -->
-            <dl>Word:</dl><dt><input id="word"></input></dt>
+            <dl>Word:</dl><dt><input id="word"></dt>
           </div>
           <button id="translate" onclick="translate1()">Translate</button>
         <!-- </form> -->
@@ -70,26 +70,28 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             }
            ?>
             </select>
-              <dl>key: </dl><dt><input id='lan-key0'></input></dt>
+              <dl>key: </dl><dt><input id='lan-key0'></dt>
             </div>
           <div class="translation">
             <td>Translation</td>
-            <tl><input id='translation0'></input></tl>
+            <tl><input id='translation0'></tl>
           </div>
-          <!-- <div>
+          <div class="conversion">
             <td>UTF-16</td>
-            <tl><input id='utf-16'></input></tl>
-          </div> -->
+            <tl><input id='utf0' size="50"></tl>
+          </div>
         </div>
 
       </div>
 
       <button id="add-section" onclick="addSection()">Add</button>
 
-      <button id="convert">CONVERT</button>
+      <button id="convert" onclick="convert()">CONVERT</button>
+
+      <button id="format" onclick="format()">FORMAT</button>
 
       <div>
-        <textarea id='code'></textarea>
+        <textarea id='code' rows="10" cols="100"></textarea>
       </div>
 
       <!-- </form> -->
