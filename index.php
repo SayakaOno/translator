@@ -23,9 +23,30 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
       <link rel="stylesheet" href="style.css">
       <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       <script src="manager.js"></script>
       <script type="text/javascript">
           var supported_language = <?php echo json_encode($supported_language); ?>;
+      </script>
+      <style>
+      .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+      </style>
+      <script>
+      $( function() {
+        $( "#sortable" ).sortable({
+          placeholder: "ui-state-highlight"
+        });
+        $( "#sortable" ).disableSelection();
+        $(".section").bind("dragstart",function(e){
+          updateNames();
+          console.log("did it");
+        });
+        $(".section").mouseup(updateNames);
+      });
+
+
+
       </script>
   </head>
 
@@ -52,11 +73,11 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
           <!-- <form> -->
             <dl>Word:</dl><dt><input id="word"></dt>
           </div>
-          <button id="translate" onclick="translate1()">Translate</button>
+          <button id="translate" onclick="translate1()" onmouseover="updateNames()">Translate</button>
         <!-- </form> -->
       </section>
 
-      <div id="sections">
+      <div id="sortable">
 
         <div class='section' id='section0'>
           <div class="language-key">

@@ -4,7 +4,7 @@ function translate1() {
     alert("Please input word!");
     return;
   } else {
-    var sectionCount = $('#sections .section').length;
+    var sectionCount = $('#sortable .section').length;
     let counter = 0;
     for (let i=0; i < sectionCount; i++) {
       var formData = new FormData();
@@ -37,7 +37,7 @@ function languageSelected(number) {
 }
 
 function addSection() {
-  var idNumber = $('#sections .section').length;
+  var idNumber = $('#sortable .section').length;
   var sectionClone = $("#section0").clone().attr('id', "section" + idNumber);
   sectionClone.find('#lan-key0').val('');
   sectionClone.find('#translation0').val('');
@@ -45,13 +45,13 @@ function addSection() {
   if (1) {
     sectionClone.find('#utf0').val('');
   }
-  sectionClone.appendTo("#sections");
+  sectionClone.appendTo("#sortable");
   updateNames();
 }
 
 function updateNames() {
   $(function(){
-      $('#sections > div').each(function(i){
+      $('#sortable > div').each(function(i){
           $(this).attr('id', 'section' + i);
       });
       $('.language-key > select').each(function(i){
@@ -84,7 +84,7 @@ function deleteSection(number) {
 }
 
 function convert() {
-  var sectionCount = $('#sections .section').length;
+  var sectionCount = $('#sortable .section').length;
   let counter = 0;
   for (let i=0; i < sectionCount; i++) {
     var formData = new FormData();
@@ -109,20 +109,20 @@ function convert() {
 }
 
 function format() {
-  var sectionCount = $('#sections .section').length;
+  var sectionCount = $('#sortable .section').length;
   let counter = 0;
   let response = "";
   for (let i=0; i < sectionCount; i++) {
     if ($('#key' + i).val() || $('#utf' + i).val()) {
       console.log(response);
-      response = response + "'" + $('#lan-key' + i).val() + "': '" + $('#utf' + i).val() + "', ";
+      response = response + '"' + $('#lan-key' + i).val() + '":"' + $('#utf' + i).val() + '",';
     }
     counter++;
   }
   if (counter === 0) {
     alert("Please translate & convert first!");
   } else {
-    response = "{" + response.slice(0, -2) + "}";
+    response = "{" + response.slice(0, -1) + "}";
     document.getElementById("code").value = response;
   }
 }
