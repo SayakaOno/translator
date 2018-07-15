@@ -41,6 +41,7 @@ function addSection() {
   var sectionClone = $("#section0").clone().attr('id', "section" + idNumber);
   sectionClone.find('#lan-key0').val('');
   sectionClone.find('#translation0').val('');
+  sectionClone.find('#order0').attr('id', "order" + idNumber).val(idNumber + 1);
   var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
   sectionClone.find('#utf0').val('');
   sectionClone.appendTo("#sortable");
@@ -53,10 +54,10 @@ function updateNames() {
       $('#sortable > div').each(function(i){
           $(this).attr('id', 'section' + i);
       });
-      $('.language-key > select').each(function(i){
+      $('.language select').each(function(i){
           $(this).attr('id', 'language' + i).attr('onchange', 'languageSelected(' + i + ')');
       });
-      $('.language-key input').each(function(i){
+      $('.key input').each(function(i){
           $(this).attr('id', 'lan-key' + i);
       });
       $('.translation input').each(function(i){
@@ -64,6 +65,9 @@ function updateNames() {
       });
       $('.conversion input').each(function(i){
           $(this).attr('id', 'utf' + i);
+      });
+      $('.order input').each(function(i){
+          $(this).attr('id', 'order' + i).attr('onkeypress', 'changeOrder(' + i + ', event)').val(i + 1);
       });
   })
 }
@@ -104,7 +108,6 @@ function format() {
   let response = "";
   for (let i=0; i < sectionCount; i++) {
     if ($('#key' + i).val() || $('#utf' + i).val()) {
-      console.log(response);
       response = response + '"' + $('#lan-key' + i).val() + '":"' + $('#utf' + i).val() + '",';
     }
     counter++;
@@ -121,20 +124,21 @@ function operateGarbageButton() {
   $(function(){
       $('.section').each(function(i){
         if (i == 0) {
-          if(($('.section')).find('button')) {
+          if($(this).find('button').length > 0) {
             $(this).find('button').remove();
           }
         } else {
-          garbageNumber = i;
-          var elementStg = '.section:eq(' + i + ')';
-          var garbage = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + garbageNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
+          if($(this).find('button').length < 1) {
+            garbageNumber = i;
+            var elementStg = '.section:eq(' + i + ')';
+            var garbage = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + garbageNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
+          }
         }
       });
     })
 }
 
 async function refereshForm() {
-  console.log("called");
   await sleep(1);
   updateNames();
   operateGarbageButton();
@@ -142,4 +146,20 @@ async function refereshForm() {
 
 function sleep(millisec) {
   return new Promise(resolve => setTimeout(resolve, millisec));
+}
+
+function changeOrder(i, event) {
+  if ($('#sortable .section').length == 1) return;
+  if (event.keyCode == 13) {
+    var inputtedNumber = $('#order' + i).val();
+    var maxNumber =  $('#sortable .section').length;
+    if ( inputtedNumber < 1 || inputtedNumber >= $('#sortable .section').length) {
+      alert("please input the number 1 - " + maxNumber);
+    } else {
+      var insertIndex = $('#order' + i).val() - 1;
+      console.log(i);
+      $('#section' + insertIndex).before($('#section' + i));
+      refereshForm();
+    }
+  }
 }
