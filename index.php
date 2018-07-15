@@ -38,11 +38,6 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
           placeholder: "ui-state-highlight"
         });
         $( "#sortable" ).disableSelection();
-        $(".section").bind("dragstart",function(e){
-          updateNames();
-          console.log("did it");
-        });
-        $(".section").mouseup(updateNames);
       });
 
 
@@ -73,13 +68,13 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
           <!-- <form> -->
             <dl>Word:</dl><dt><input id="word"></dt>
           </div>
-          <button id="translate" onclick="translate1()" onmouseover="updateNames()">Translate</button>
+          <button id="translate" onclick="translate1()">Translate</button>
         <!-- </form> -->
       </section>
 
       <div id="sortable">
 
-        <div class='section' id='section0'>
+        <div class='section' id='section0' onmouseup="refereshForm()">
           <div class="language-key">
             <select id='language0' onchange='languageSelected(0)'>
             <option value="">select language</option>

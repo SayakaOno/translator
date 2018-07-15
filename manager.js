@@ -42,15 +42,14 @@ function addSection() {
   sectionClone.find('#lan-key0').val('');
   sectionClone.find('#translation0').val('');
   var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
-  if (1) {
-    sectionClone.find('#utf0').val('');
-  }
+  sectionClone.find('#utf0').val('');
   sectionClone.appendTo("#sortable");
   updateNames();
 }
 
 function updateNames() {
   $(function(){
+
       $('#sortable > div').each(function(i){
           $(this).attr('id', 'section' + i);
       });
@@ -63,19 +62,10 @@ function updateNames() {
       $('.translation input').each(function(i){
           $(this).attr('id', 'translation' + i);
       });
-      $('.section button').each(function(i){
-        if (i != 0) {
-          $(this).attr('id', 'garbage' + i).attr('onclick', 'deleteSection(' + i + ')');
-        }
+      $('.conversion input').each(function(i){
+          $(this).attr('id', 'utf' + i);
       });
-      if (1) {
-        $('.conversion input').each(function(i){
-          if (i != 0) {
-            $(this).attr('id', 'utf' + i);
-          }
-        });
-      }
-    })
+  })
 }
 
 function deleteSection(number) {
@@ -125,4 +115,31 @@ function format() {
     response = "{" + response.slice(0, -1) + "}";
     document.getElementById("code").value = response;
   }
+}
+
+function operateGarbageButton() {
+  $(function(){
+      $('.section').each(function(i){
+        if (i == 0) {
+          if(($('.section')).find('button')) {
+            $(this).find('button').remove();
+          }
+        } else {
+          garbageNumber = i;
+          var elementStg = '.section:eq(' + i + ')';
+          var garbage = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + garbageNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
+        }
+      });
+    })
+}
+
+async function refereshForm() {
+  console.log("called");
+  await sleep(1);
+  updateNames();
+  operateGarbageButton();
+}
+
+function sleep(millisec) {
+  return new Promise(resolve => setTimeout(resolve, millisec));
 }
