@@ -14,21 +14,27 @@ dt, dl {
   margin: 0;
 }
 #sortable {
-  border: 1px gray solid;
+  border: 1px #e1e4e8 solid;
   border-bottom: none;
 }
 #sortable .section {
   padding: 20px;
-  background-color: lightyellow;
-  border-bottom: 1px gray solid;
+  border-bottom: 1px #e1e4e8 solid;
   cursor: move;
+}
+#sortable .section:hover {
+  background-color: #f9f9f9;
 }
 #inputted {
   margin-bottom: 20px;
   text-align: center;
 }
 .sortable-header {
+  background-color: #F16027;
+  color: #fff;
   padding: 20px;
+  border: 1px #e1e4e8 solid;
+  border-bottom: none;
 }
 .sortable-header > div {
   text-align: center;

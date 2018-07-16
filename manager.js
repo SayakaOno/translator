@@ -153,11 +153,10 @@ function changeOrder(i, event) {
   if (event.keyCode == 13) {
     var inputtedNumber = $('#order' + i).val();
     var maxNumber =  $('#sortable .section').length;
-    if ( inputtedNumber < 1 || inputtedNumber >= $('#sortable .section').length) {
+    if ( inputtedNumber < 1 || inputtedNumber > $('#sortable .section').length) {
       alert("please input the number 1 - " + maxNumber);
     } else {
       var insertIndex = $('#order' + i).val() - 1;
-      console.log(i);
       $('#section' + insertIndex).before($('#section' + i));
       refereshForm();
     }
