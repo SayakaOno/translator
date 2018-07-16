@@ -39,9 +39,6 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
         });
         $( "#sortable" ).disableSelection();
       });
-
-
-
       </script>
   </head>
 
@@ -72,30 +69,31 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
         <!-- </form> -->
       </section>
 
+      <div class='sortable-header'>
+        <div class="order">order</div>
+        <div class="language">language</div>
+        <div class="key">key</div>
+        <div class="translation">Translation</div>
+        <div class="conversion">UTF-16</div>
+      </div>
+
       <div id="sortable">
 
         <div class='section' id='section0' onmouseup="refereshForm()">
-          <div class="language-key">
+          <div class="order"><input id='order0' value=1 maxlength="4" onkeypress="return changeOrder(0, event)"></div>
+          <div class="language">
             <select id='language0' onchange='languageSelected(0)'>
             <option value="">select language</option>
             <?php
             foreach ($supported_language as $key=>$value) {
-            //TODO: when the original language is changed, this should be refreshed.
-              // if ($key == $userBrowserLanguage) continue;
               echo "<option value='$key'>$value</option>";
             }
            ?>
             </select>
-              <dl>key: </dl><dt><input id='lan-key0'></dt>
-            </div>
-          <div class="translation">
-            <td>Translation</td>
-            <tl><input id='translation0'></tl>
           </div>
-          <div class="conversion">
-            <td>UTF-16</td>
-            <tl><input id='utf0' size="50"></tl>
-          </div>
+          <div class="key"><input id='lan-key0'></div>
+          <div class="translation"><input id='translation0'></div>
+          <div class="conversion"><input id='utf0' size="50"></div>
         </div>
 
       </div>

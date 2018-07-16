@@ -2,10 +2,6 @@ html {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
   box-sizing: border-box;
 }
-dt, dl {
-  display: inline-block;
-  margin: 0;
-}
 main {
   max-width: 950px;
   margin: 0 auto;
@@ -13,25 +9,73 @@ main {
 header {
   text-align: center;
 }
+dt, dl {
+  display: inline-block;
+  margin: 0;
+}
+#sortable {
+  border: 1px #e1e4e8 solid;
+  border-bottom: none;
+}
 #sortable .section {
-  position: relative;
   padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  background-color: lightyellow;
+  border-bottom: 1px #e1e4e8 solid;
+  cursor: move;
+}
+#sortable .section:hover {
+  background-color: #f9f9f9;
 }
 #inputted {
   margin-bottom: 20px;
   text-align: center;
 }
-.language-key {
-  margin-bottom: 10px;
+.sortable-header {
+  background-color: #F16027;
+  color: #fff;
+  padding: 20px;
+  border: 1px #e1e4e8 solid;
+  border-bottom: none;
+}
+.sortable-header > div {
+  text-align: center;
+}
+.sortable-header > div, .section > div {
+  display: inline-block;
+}
+.section input {
+  width: 90%;
+  margin-left: 5%;
+}
+.language {
+  width: 200px;
+}
+.language select {
+  margin-left: 8px;
+}
+.order {
+  width: 50px;
+}
+.order input {
+  width: 25px;
+}
+.key {
+  width: 60px;
+}
+.key input{
+  width: 40px;
+  margin-left: 6px;
+  text-align: center;
+}
+.translation {
+  width: 250px;
+  min-width: 50px;
+}
+.conversion {
+  width: 250px;
+  min-width: 50px;
 }
 .garbage {
   display: inline-block;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
   padding: 10px;
   border-radius: 5px;
   background-color: yellow;
