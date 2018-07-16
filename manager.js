@@ -32,6 +32,31 @@ function translate1() {
   }
 }
 
+function convert() {
+  var sectionCount = $('#sortable .section').length;
+  let counter = 0;
+  for (let i=0; i < sectionCount; i++) {
+    var formData = new FormData();
+    var translatedWord = $("#translation" + i).val();
+    if (!translatedWord) continue;
+    formData.append('string', translatedWord);
+    formData.append('action','convert');
+    $.ajax({
+      type: "POST",
+      url: 'conversion.php',
+      data: formData,
+      contentType: false,
+      processData: false
+    }).done(function(res) {
+      document.getElementById("utf" + i).value = res;
+    });
+    counter++;
+  }
+  if (counter === 0) {
+    alert("Please translate first!");
+  }
+}
+
 function languageSelected(number) {
   document.getElementById("lan-key" + number).value = document.getElementById("language" + number).value;
 }
@@ -42,7 +67,9 @@ function addSection() {
   sectionClone.find('#lan-key0').val('');
   sectionClone.find('#translation0').val('');
   sectionClone.find('#order0').attr('id', "order" + idNumber).val(idNumber + 1);
-  var garbageButton = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
+  sectionClone.find('.translation-copy').attr('onclick', "copy('translation" + idNumber + "')");
+  sectionClone.find('.utf-copy').attr('onclick', "copy('utf" + idNumber + "')");
+  $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
   sectionClone.find('#utf0').val('');
   sectionClone.appendTo("#sortable");
   updateNames();
@@ -69,38 +96,24 @@ function updateNames() {
       $('.order input').each(function(i){
           $(this).attr('id', 'order' + i).attr('onkeypress', 'changeOrder(' + i + ', event)').val(i + 1);
       });
+      $('.translation-copy').each(function(i){
+          $(this).attr('onclick', "copy('translation" + i + "')");
+      });
+      $('.utf-copy').each(function(i){
+          $(this).attr('onclick', "copy('utf" + i + "')");
+      });
+      $('.garbage').each(function(i){
+          var garbageId = i + 1;
+          $(this).attr('id', "garbage" + garbageId).attr('onclick', 'deleteSection(' + garbageId + ')');
+      });
   })
 }
 
 function deleteSection(number) {
   ($('#section' + number)).remove();
-  updateNames();
+  refereshForm();
 }
 
-function convert() {
-  var sectionCount = $('#sortable .section').length;
-  let counter = 0;
-  for (let i=0; i < sectionCount; i++) {
-    var formData = new FormData();
-    var translatedWord = $("#translation" + i).val();
-    if (!translatedWord) continue;
-    formData.append('string', translatedWord);
-    formData.append('action','convert');
-    $.ajax({
-      type: "POST",
-      url: 'conversion.php',
-      data: formData,
-      contentType: false,
-      processData: false
-    }).done(function(res) {
-      document.getElementById("utf" + i).value = res;
-    });
-    counter++;
-  }
-  if (counter === 0) {
-    alert("Please translate first!");
-  }
-}
 
 function format() {
   var sectionCount = $('#sortable .section').length;
@@ -129,9 +142,8 @@ function operateGarbageButton() {
           }
         } else {
           if($(this).find('button').length < 1) {
-            garbageNumber = i;
-            var elementStg = '.section:eq(' + i + ')';
-            var garbage = $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + garbageNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
+            console.log("no button");
+            $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + i).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
           }
         }
       });
@@ -161,4 +173,13 @@ function changeOrder(i, event) {
       refereshForm();
     }
   }
+}
+
+function copy(element) {
+  /* Get the text field */
+  var copyText = document.getElementById(element);
+  /* Select the text field */
+  copyText.select();
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
 }

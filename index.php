@@ -47,7 +47,6 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
       <h1>Translation & Conversion</h1>
     </header>
     <main>
-      <!-- <form> -->
         <section id=inputted>
           <div>
             <select id="original-language">
@@ -62,11 +61,9 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
               }
              ?>
             </select>
-          <!-- <form> -->
-            <dl>Word:</dl><dt><input id="word"></dt>
+            <dl>Word:</dl><dt><input type="text" id="word"></dt>
           </div>
           <button id="translate" onclick="translate1()">Translate</button>
-        <!-- </form> -->
       </section>
 
       <div class='sortable-header'>
@@ -80,7 +77,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
       <div id="sortable">
 
         <div class='section' id='section0' onmouseup="refereshForm()">
-          <div class="order"><input id='order0' value=1 maxlength="4" onkeypress="return changeOrder(0, event)"></div>
+          <div class="order"><input type="text" id='order0' value=1 maxlength="4" onkeypress="return changeOrder(0, event)"></div>
           <div class="language">
             <select id='language0' onchange='languageSelected(0)'>
             <option value="">select language</option>
@@ -88,15 +85,28 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             foreach ($supported_language as $key=>$value) {
               echo "<option value='$key'>$value</option>";
             }
-           ?>
+            ?>
             </select>
           </div>
-          <div class="key"><input id='lan-key0'></div>
-          <div class="translation"><input id='translation0'></div>
-          <div class="conversion"><input id='utf0' size="50"></div>
+          <div class="key"><input type="text" id='lan-key0'></div>
+          <div class="translation">
+            <input type="text" id='translation0'>
+            <div class="copy-button">
+              <span class="translation-copy" onclick="copy('translation0')"><i class="far fa-copy"></i></span>
+              <div class="wrap-arrow"><span class="arrow_box">copy</span></div>
+            </div>
+          </div>
+          <div class="conversion">
+            <input type="text" id='utf0'>
+            <div class="copy-button">
+              <span class="utf-copy" onclick="copy('utf0')"><i class="far fa-copy"></i></span>
+              <div class="wrap-arrow"><span class="arrow_box">copy</span></div>
+          </div>
         </div>
 
       </div>
+
+    </div>
 
       <button id="add-section" onclick="addSection()">Add</button>
 
@@ -108,7 +118,6 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
         <textarea id='code' rows="10" cols="100"></textarea>
       </div>
 
-      <!-- </form> -->
     </main>
   </body>
 </html>

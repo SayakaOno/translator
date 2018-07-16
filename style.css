@@ -13,6 +13,12 @@ dt, dl {
   display: inline-block;
   margin: 0;
 }
+#inputted {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* #sotable */
 #sortable {
   border: 1px #e1e4e8 solid;
   border-bottom: none;
@@ -24,10 +30,6 @@ dt, dl {
 }
 #sortable .section:hover {
   background-color: #f9f9f9;
-}
-#inputted {
-  margin-bottom: 20px;
-  text-align: center;
 }
 .sortable-header {
   background-color: #F16027;
@@ -42,21 +44,26 @@ dt, dl {
 .sortable-header > div, .section > div {
   display: inline-block;
 }
+
+/* .section */
 .section input {
   width: 90%;
+  height: 22px;
   margin-left: 5%;
-}
-.language {
-  width: 200px;
-}
-.language select {
-  margin-left: 8px;
 }
 .order {
   width: 50px;
 }
 .order input {
   width: 25px;
+  text-align: center;
+}
+.language {
+  width: 200px;
+}
+.language select {
+  margin-left: 8px;
+  height: 30px;
 }
 .key {
   width: 60px;
@@ -66,13 +73,56 @@ dt, dl {
   margin-left: 6px;
   text-align: center;
 }
-.translation {
-  width: 250px;
-  min-width: 50px;
+.translation, .conversion {
+  width: 270px;
 }
-.conversion {
-  width: 250px;
-  min-width: 50px;
+.translation div, .conversion div {
+  width: 20px;
+  display: inline-block;
+  position: relative;
+}
+.translation input, .conversion input {
+  width: 78%;
+}
+.section span {
+  display: inline-block;
+  cursor: pointer;
+  padding: 6px;
+}
+.copy-button:hover .wrap-arrow {
+  display: block!important;
+}
+.copy-button:active .arrow_box {
+  content: "copied!";
+}
+.translation .wrap-arrow, .conversion .wrap-arrow {
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  left: -11px;
+  display: none;
+}
+.arrow_box {
+	position: relative;
+	background: #000000;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: small;
+  padding: 5px 10px!important;
+}
+.arrow_box:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(0, 0, 0, 0);
+	border-top-color: #000000;
+	border-width: 10px;
+	margin-left: -10px;
 }
 .garbage {
   display: inline-block;
