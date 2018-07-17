@@ -38,7 +38,20 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
           placeholder: "ui-state-highlight"
         });
         $( "#sortable" ).disableSelection();
+
+        var bt = $("#inputted").offset().top; // get the distance from the top to the element
+        var ds = 0;
+        $(document).scroll(function(){ // scroll statement
+            ds = $(this).scrollTop(); // get the scrolled distance
+
+            if (bt <= ds) {  // the position of the element <= scrolled distance
+                $("#inputted").addClass('follow'); // add "follow" class
+            } else if (bt >= ds) { // scroll goes to the top
+                $("#inputted").removeClass('follow'); // remove class
+            }
+        });
       });
+
       </script>
   </head>
 
@@ -61,9 +74,8 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
               }
              ?>
             </select>
-            <dl>Word:</dl><dt><input type="text" id="word"></dt>
+            <input type="text" id="word" placeholder="type word">
           </div>
-          <button id="translate" onclick="translate1()">Translate</button>
       </section>
 
       <div class='sortable-header'>
@@ -108,15 +120,19 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
 
     </div>
 
-      <button id="add-section" onclick="addSection()">Add</button>
+    <button id="add-section" onclick="addSection()"><i class="fas fa-plus-circle"></i></button>
 
-      <button id="convert" onclick="convert()">CONVERT</button>
+    <div class="buttons">
+      <button id="translate" onclick="translate1()">Translate</button>
+
+      <button id="convert" onclick="convert()">Translation<span><i class="fas fa-arrow-right"></i></span>UTF16</button>
 
       <button id="format" onclick="format()">FORMAT</button>
+    </div>
 
-      <div>
-        <textarea id='code' rows="10" cols="100"></textarea>
-      </div>
+    <div class="formatted">
+      <textarea id='code' rows="10" cols="100"></textarea>
+    </div>
 
     </main>
   </body>
