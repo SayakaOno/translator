@@ -39,15 +39,15 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
         });
         $( "#sortable" ).disableSelection();
 
-        var bt = $("#inputted").offset().top; // boxのページ上からの距離を取得
+        var bt = $("#inputted").offset().top; // get the distance from the top to the element
         var ds = 0;
-        $(document).scroll(function(){ // スクロール発生時の処理の記述を開始
-            ds = $(this).scrollTop(); // ユーザのスクロールした距離を取得
+        $(document).scroll(function(){ // scroll statement
+            ds = $(this).scrollTop(); // get the scrolled distance
 
-            if (bt <= ds) {  // スクロール距離がboxの位置を超えたら、
-                $("#inputted").addClass('follow'); // 「follow」というclassを追加する
-            } else if (bt >= ds) { // スクロールがページ上まで戻ったら、
-                $("#inputted").removeClass('follow'); // classを削除
+            if (bt <= ds) {  // the position of the element <= scrolled distance
+                $("#inputted").addClass('follow'); // add "follow" class
+            } else if (bt >= ds) { // scroll goes to the top
+                $("#inputted").removeClass('follow'); // remove class
             }
         });
       });
