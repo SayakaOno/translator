@@ -69,7 +69,7 @@ function addSection() {
   sectionClone.find('#order0').attr('id', "order" + idNumber).val(idNumber + 1);
   sectionClone.find('.translation-copy').attr('onclick', "copy('translation" + idNumber + "')");
   sectionClone.find('.utf-copy').attr('onclick', "copy('utf" + idNumber + "')");
-  $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
+  $("<button></button>").html("<i class='fas fa-times-circle'></i>").attr('id', "garbage" + idNumber).attr('class', "garbage").attr('onclick', 'deleteSection(' + idNumber + ')').appendTo(sectionClone);
   sectionClone.find('#utf0').val('');
   sectionClone.appendTo("#sortable");
   updateNames();
@@ -143,7 +143,7 @@ function operateGarbageButton() {
         } else {
           if($(this).find('button').length < 1) {
             console.log("no button");
-            $("<button></button>").html("<i class='fas fa-trash-alt'></i>").attr('id', "garbage" + i).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
+            $("<button></button>").html("<i class='fas fa-times-circle'></i>").attr('id', "garbage" + i).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
           }
         }
       });
