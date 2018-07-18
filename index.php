@@ -28,30 +28,24 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
       <script src="manager.js"></script>
       <script type="text/javascript">
           var supported_language = <?php echo json_encode($supported_language); ?>;
-      </script>
-      <style>
-      .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-      </style>
-      <script>
-      $( function() {
-        $( "#sortable" ).sortable({
-          placeholder: "ui-state-highlight"
-        });
-        $( "#sortable" ).disableSelection();
+          $( function() {
+            $( "#sortable" ).sortable({
+              placeholder: "ui-state-highlight"
+            });
+            $( "#sortable" ).disableSelection();
 
-        var bt = $("#inputted").offset().top; // get the distance from the top to the element
-        var ds = 0;
-        $(document).scroll(function(){ // scroll statement
-            ds = $(this).scrollTop(); // get the scrolled distance
+            var bt = $("#inputted").offset().top; // get the distance from the top to the element
+            var ds = 0;
+            $(document).scroll(function(){ // scroll statement
+                ds = $(this).scrollTop(); // get the scrolled distance
 
-            if (bt <= ds) {  // the position of the element <= scrolled distance
-                $("#inputted").addClass('follow'); // add "follow" class
-            } else if (bt >= ds) { // scroll goes to the top
-                $("#inputted").removeClass('follow'); // remove class
-            }
-        });
-      });
-
+                if (bt <= ds) {  // the position of the element <= scrolled distance
+                    $("#inputted").addClass('follow'); // add "follow" class
+                } else if (bt >= ds) { // scroll goes to the top
+                    $("#inputted").removeClass('follow'); // remove class
+                }
+            });
+          });
       </script>
   </head>
 
@@ -61,66 +55,69 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
     </header>
     <main>
         <section id=inputted>
-          <div>
-            <select id="original-language">
-              <?php
-              foreach ($supported_language as $key=>$value) {
-                if ($key == $userBrowserLanguage) {
-                  $defaultSetting = " selected";
-                } else {
-                  $defaultSetting = "";
-                }
-                echo "<option value='$key' $defaultSetting>$value</option>";
-              }
-             ?>
-            </select>
-            <input type="text" id="word" placeholder="type word">
-          </div>
-      </section>
-
-      <div class='sortable-header'>
-        <div class="order">order</div>
-        <div class="language">language</div>
-        <div class="key">key</div>
-        <div class="translation">Translation</div>
-        <div class="conversion">UTF-16</div>
-      </div>
-
-      <div id="sortable">
-
-        <div class='section' id='section0' onmouseup="refereshForm()">
-          <div class="order"><input type="text" id='order0' value=1 maxlength="4" onkeypress="return changeOrder(0, event)"></div>
-          <div class="language">
-            <select id='language0' onchange='languageSelected(0)'>
-            <option value="">select language</option>
+          <select id="original-language">
             <?php
             foreach ($supported_language as $key=>$value) {
-              echo "<option value='$key'>$value</option>";
+              if ($key == $userBrowserLanguage) {
+                $defaultSetting = " selected";
+              } else {
+                $defaultSetting = "";
+              }
+              echo "<option value='$key' $defaultSetting>$value</option>";
             }
-            ?>
-            </select>
+           ?>
+          </select>
+          <input type="text" id="word" placeholder="type word">
+      </section>
+
+      <div class="table-container">
+        <div class="table">
+
+          <div class='sortable-header'>
+            <div class="order">order</div>
+            <div class="language">language</div>
+            <div class="key">key</div>
+            <div class="translation">Translation</div>
+            <div class="conversion">UTF-16</div>
           </div>
-          <div class="key"><input type="text" id='lan-key0'></div>
-          <div class="translation">
-            <input type="text" id='translation0'>
-            <div class="copy-button">
-              <span class="translation-copy" onclick="copy('translation0')"><i class="far fa-copy"></i></span>
-              <div class="wrap-arrow"><span class="arrow_box">copy</span></div>
+
+          <div id="sortable">
+
+            <div class='section' id='section0' onmouseup="refereshForm()">
+              <div class="order"><input type="text" id='order0' value=1 maxlength="4" onkeypress="return changeOrder(0, event)"></div>
+              <div class="language">
+                <select id='language0' onchange='languageSelected(0)'>
+                <option value="">select language</option>
+                <?php
+                foreach ($supported_language as $key=>$value) {
+                  echo "<option value='$key'>$value</option>";
+                }
+                ?>
+                </select>
+              </div>
+              <div class="key"><input type="text" id='lan-key0'></div>
+              <div class="translation">
+                <input type="text" id='translation0'>
+                <div class="copy-button">
+                  <span class="translation-copy" onclick="copy('translation0')"><i class="far fa-copy"></i></span>
+                  <div class="wrap-arrow"><span class="arrow_box">copy</span></div>
+                </div>
+              </div>
+              <div class="conversion">
+                <input type="text" id='utf0'>
+                <div class="copy-button">
+                  <span class="utf-copy" onclick="copy('utf0')"><i class="far fa-copy"></i></span>
+                  <div class="wrap-arrow"><span class="arrow_box">copy</span></div>
+              </div>
             </div>
+
           </div>
-          <div class="conversion">
-            <input type="text" id='utf0'>
-            <div class="copy-button">
-              <span class="utf-copy" onclick="copy('utf0')"><i class="far fa-copy"></i></span>
-              <div class="wrap-arrow"><span class="arrow_box">copy</span></div>
-          </div>
+
         </div>
-
+        <button id="add-section" onclick="addSection()"><i class="fas fa-plus-circle"></i></button>
       </div>
-
     </div>
 
-    <button id="add-section" onclick="addSection()"><i class="fas fa-plus-circle"></i></button>
 
     <div class="buttons">
       <button id="translate" onclick="translate1()">Translate</button>

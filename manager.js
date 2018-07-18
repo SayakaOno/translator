@@ -57,6 +57,24 @@ function convert() {
   }
 }
 
+function translationToFormat() {
+  $.when(
+    convert()
+  ).done(function() {
+    var i = $('#sortable .section').length - 1;
+    var foundIndex = 0;
+    for (i; 0 <= i; i--) {
+      if ($('#translation' + i).val()) {
+        foundIndex = i;
+        //TODO
+        //check if the utf inputted
+        format();
+        break;
+      }
+    }
+  });
+}
+
 function languageSelected(number) {
   document.getElementById("lan-key" + number).value = document.getElementById("language" + number).value;
 }
@@ -142,7 +160,6 @@ function operateGarbageButton() {
           }
         } else {
           if($(this).find('button').length < 1) {
-            console.log("no button");
             $("<button></button>").html("<i class='fas fa-times-circle'></i>").attr('id', "garbage" + i).attr('class', "garbage").attr('onclick', 'deleteSection(' + i + ')').appendTo($('.section:eq(' + i + ')'));
           }
         }
