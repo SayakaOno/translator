@@ -1,3 +1,22 @@
+$( function() {
+  $( "#sortable" ).sortable({
+    placeholder: "ui-state-highlight"
+  });
+  $( "#sortable" ).disableSelection();
+
+  var bt = $("#inputted").offset().top; // get the distance from the top to the element
+  var ds = 0;
+  $(document).scroll(function(){ // scroll statement
+      ds = $(this).scrollTop(); // get the scrolled distance
+
+      if (bt <= ds) {  // the position of the element <= scrolled distance
+          $("#inputted").addClass('follow'); // add "follow" class
+      } else if (bt >= ds) { // scroll goes to the top
+          $("#inputted").removeClass('follow'); // remove class
+      }
+  });
+});
+
 function translate1() {
   var word = document.getElementById("word").value;
   if (word.length == 0) {

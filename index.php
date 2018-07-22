@@ -27,25 +27,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
       <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       <script src="manager.js"></script>
       <script type="text/javascript">
-          var supported_language = <?php echo json_encode($supported_language); ?>;
-          $( function() {
-            $( "#sortable" ).sortable({
-              placeholder: "ui-state-highlight"
-            });
-            $( "#sortable" ).disableSelection();
-
-            var bt = $("#inputted").offset().top; // get the distance from the top to the element
-            var ds = 0;
-            $(document).scroll(function(){ // scroll statement
-                ds = $(this).scrollTop(); // get the scrolled distance
-
-                if (bt <= ds) {  // the position of the element <= scrolled distance
-                    $("#inputted").addClass('follow'); // add "follow" class
-                } else if (bt >= ds) { // scroll goes to the top
-                    $("#inputted").removeClass('follow'); // remove class
-                }
-            });
-          });
+        var supported_language = <?php echo json_encode($supported_language); ?>;
       </script>
   </head>
 
