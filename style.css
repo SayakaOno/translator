@@ -15,7 +15,7 @@ dt, dl {
   margin: 0;
 }
 span {
-  z-index: 2;
+  z-index: 3;
 }
 button:focus {
   outline: none;
@@ -29,7 +29,7 @@ button:focus {
   padding: 20px 0;
   top: 40px;
   background: #fff;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
 }
 .inputted-container {
@@ -85,7 +85,7 @@ body .follow {
   background-color: yellow;
 }
 .section {
-  z-index: 3;
+  z-index: 4;
 }
 .section input {
   width: 90%;
@@ -217,4 +217,24 @@ body .follow {
 }
 #convert:hover span {
   padding: 0 3px 0 7px;
+}
+
+/* translating... */
+body #indicator {
+  display: none;
+}
+body.translating #indicator {
+  z-index: 1;
+  position: absolute;
+  display: block;
+  padding: 20px 0 50px 0;
+  width: 450px;
+  top: 30%;
+  left: 50%;
+  margin-left: -225px;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  opacity: 0.8;
+  border-radius: 10px;
 }

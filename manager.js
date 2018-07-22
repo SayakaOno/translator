@@ -6,11 +6,17 @@ function translate1() {
   } else {
     var sectionCount = $('#sortable .section').length;
     let counter = 0;
+    let check = 0;
+    let start = false;
     for (let i=0; i < sectionCount; i++) {
       var formData = new FormData();
       var originalLanguageVal = $("#original-language :selected").val();
       var selectedLanguageVal = $("#language" + i + " :selected").val();
       if (!selectedLanguageVal) continue;
+      if (!start) {
+        $(document.body).attr('class', 'translating');
+        start = true;
+      }
       formData.append('originalLanguage', originalLanguageVal);
       formData.append('targetLanguage', selectedLanguageVal);
       formData.append('action','translate');
@@ -22,7 +28,16 @@ function translate1() {
         contentType: false,
         processData: false
       }).done(function(res) {
-        document.getElementById("translation" + i).value = res;
+        if(!res) {
+          alert("Please click Translate button one more time!");
+        } else {
+          document.getElementById("translation" + i).value = res;
+          check++;
+        }
+      }).done(function(res) {
+        if (counter == check) {
+          $(document.body).removeClass('translating')
+        }
       });
       counter++;
     }

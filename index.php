@@ -50,6 +50,10 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
   </head>
 
   <body>
+    <div id="indicator">
+      <p>Translating...</p>
+      <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+    </div>
     <header>
       <h1>Translation & Conversion</h1>
     </header>
