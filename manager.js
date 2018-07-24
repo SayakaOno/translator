@@ -33,7 +33,8 @@ function translate1() {
       var selectedLanguageVal = $("#language" + i + " :selected").val();
       if (!selectedLanguageVal) continue;
       if (!start) {
-        $(document.body).attr('class', 'translating');
+        $(document.body).attr('class', 'processing');
+        document.getElementById("processing").innerHTML = "Translating...";
         start = true;
       }
       formData.append('originalLanguage', originalLanguageVal);
@@ -55,7 +56,7 @@ function translate1() {
         }
       }).done(function(res) {
         if (counter == check) {
-          $(document.body).removeClass('translating')
+          $(document.body).removeClass('processing');
         }
       });
       counter++;
@@ -92,21 +93,45 @@ function convert() {
 }
 
 function translationToFormat() {
-  $.when(
-    convert()
-  ).done(function() {
-    var i = $('#sortable .section').length - 1;
-    var foundIndex = 0;
-    for (i; 0 <= i; i--) {
-      if ($('#translation' + i).val()) {
-        foundIndex = i;
-        //TODO
-        //check if the utf inputted
-        format();
-        break;
-      }
+  //convert
+  var sectionCount = $('#sortable .section').length;
+  let counter = 0;
+  let check = 0;
+  let start = false;
+  for (let i=0; i < sectionCount; i++) {
+    var formData = new FormData();
+    var translatedWord = $("#translation" + i).val();
+    if (!translatedWord) continue;
+    if (!start) {
+      $(document.body).attr('class', 'processing');
+      document.getElementById("processing").innerHTML = "Formatting...";
+      start = true;
     }
-  });
+    formData.append('string', translatedWord);
+    formData.append('action','convert');
+    $.ajax({
+      type: "POST",
+      url: 'conversion.php',
+      data: formData,
+      contentType: false,
+      processData: false
+    }).done(function(res) {
+      if(!res) {
+        alert("Please click the button one more time!");
+      } else {
+        document.getElementById("utf" + i).value = res;
+        check++;
+        if (check == counter) {
+          format();
+          $(document.body).removeClass('processing');
+        }
+      }
+    });
+    counter++;
+  }
+  if (counter === 0) {
+    alert("Please translate first!");
+  }
 }
 
 function languageSelected(number) {

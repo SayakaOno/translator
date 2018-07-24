@@ -33,7 +33,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
 
   <body>
     <div id="indicator">
-      <p>Translating...</p>
+      <p id="processing"></p>
       <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
     </div>
     <header>
@@ -108,9 +108,9 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
     <div class="buttons">
       <button id="translate" onclick="translate1()">Translate</button>
 
-      <button id="convert" onclick="convert()">Translation<span><i class="fas fa-arrow-right"></i></span>UTF16</button>
+      <button id="convert" onclick="translationToFormat()">Translation<span><i class="fas fa-arrow-right"></i></span>UTF16</button>
 
-      <button id="format" onclick="format()">FORMAT</button>
+      <button id="format" onclick="format()">REFORMAT</button>
     </div>
 
     <div class="formatted">

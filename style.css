@@ -219,11 +219,11 @@ body .follow {
   padding: 0 3px 0 7px;
 }
 
-/* translating... */
+/* processing... */
 body #indicator {
   display: none;
 }
-body.translating #indicator {
+body.processing #indicator {
   z-index: 1;
   position: absolute;
   display: block;
