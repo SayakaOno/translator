@@ -53,7 +53,10 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
             }
            ?>
           </select>
-          <input type="text" id="word" placeholder="type word">
+          <div class="word-input">
+            <input type="text" id="word" placeholder="type word">
+            <span onclick="clearWord()"><i class="fas fa-times-circle"></i></span>
+          </div>
       </section>
 
       <div class="table-container">

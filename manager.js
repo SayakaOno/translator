@@ -259,3 +259,12 @@ function copy(element) {
   /* Copy the text inside the text field */
   document.execCommand("copy");
 }
+
+function clearWord() {
+  document.getElementById("word").value = "";
+  for (var i = 0; i < $('#sortable .section').length; i++) {
+    document.getElementById("translation" + i).value = "";
+    document.getElementById("utf" + i).value = "";
+  }
+  document.getElementById("code").value = "";
+}

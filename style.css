@@ -2,6 +2,9 @@ html {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
   box-sizing: border-box;
 }
+body {
+  margin: 0 10px;
+}
 main {
   max-width: 950px;
   margin: 0 auto;
@@ -20,6 +23,57 @@ span {
 button:focus {
   outline: none;
 }
+select {
+  background-color: #fff;
+  border-color: lightgrey;
+}
+select:focus {
+  outline: none;
+  border: 1px #F16027 solid;
+}
+input:focus {
+  outline: none;
+  border: 1px #F16027 solid;
+}
+textarea:focus {
+  outline: none;
+  border: 1px #F16027 solid;
+}
+
+#original-language {
+  height: 38px;
+}
+#word {
+  margin-left: 5px;
+  padding-right: 15px;
+  padding-left: 10px;
+  width: 190px;
+  height: 34px;
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+}
+#word:focus {
+  border: 1px #F16027 solid!important;
+}
+.word-input {
+  position: relative;
+  display: inline-block;
+}
+.word-input:hover span {
+  display: block;
+}
+.word-input span {
+  display: none;
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  margin-top: -8px;
+  cursor: pointer;
+  color: lightgrey;
+}
+.word-input span:hover {
+  color: #F16027;
+}
 
 #inputted {
   max-width: 950px;
@@ -36,6 +90,7 @@ button:focus {
   width: 321px;
   margin: 0 auto;
 }
+
 body {
     position: relative;
 }
@@ -82,7 +137,7 @@ body .follow {
 /* .section */
 .ui-state-highlight {
   height: 73px;
-  background-color: yellow;
+  background-color: rgb(250, 255, 189);
 }
 .section {
   z-index: 4;
