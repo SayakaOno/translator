@@ -254,6 +254,7 @@ body .follow {
   font-size: 15px;
   padding: 10px;
   margin: 0 20px;
+  margin-bottom: 10px;
 }
 .buttons button:hover {
   background-color: #F16027;
@@ -264,14 +265,11 @@ body .follow {
   margin: 0 auto;
   width: 600px;
   max-width: 100%;
-  height: 130px;
+  height: 150px;
   box-sizing: border-box;
 }
 #convert span {
-  padding: 0 5px 0 5px;
-}
-#convert:hover span {
-  padding: 0 3px 0 7px;
+  padding-right: 5px;
 }
 
 /* processing... */
@@ -292,4 +290,30 @@ body.processing #indicator {
   color: #fff;
   opacity: 0.8;
   border-radius: 10px;
+}
+
+@media only screen and (max-width: 958px) {
+  body .follow {
+      margin-left: -10px;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  #inputted select, #inputted input{
+    margin-bottom: 10px;
+    height: 30px;
+  }
+  .word-input span {
+    margin-top: -14px;
+  }
+  .table-container {
+    margin-top: 60px;
+  }
+  .buttons {
+    margin-bottom: 15px;
+  }
+  .buttons button {
+    margin: 0 10px;
+    margin-bottom: 20px;
+  }
 }

@@ -37,7 +37,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
       <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
     </div>
     <header>
-      <h1>Translation & Conversion</h1>
+      <h1>Translator</h1>
     </header>
     <main>
         <section id=inputted>
@@ -111,7 +111,7 @@ if (!$userBrowserLanguage || !array_key_exists($userBrowserLanguage, $supported_
     <div class="buttons">
       <button id="translate" onclick="translate1()">Translate</button>
 
-      <button id="convert" onclick="translationToFormat()">Translation<span><i class="fas fa-arrow-right"></i></span>UTF16</button>
+      <button id="convert" onclick="translationToFormat()"><span><i class="fas fa-arrow-right"></i></span>UTF16</button>
 
       <button id="format" onclick="format()">REFORMAT</button>
     </div>
