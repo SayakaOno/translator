@@ -199,8 +199,8 @@ function format() {
   for (let i=0; i < sectionCount; i++) {
     if ($('#key' + i).val() || $('#utf' + i).val()) {
       response = response + '"' + $('#lan-key' + i).val() + '":"' + $('#utf' + i).val() + '",';
+      counter++;
     }
-    counter++;
   }
   if (counter === 0) {
     alert("Please translate & convert first!");

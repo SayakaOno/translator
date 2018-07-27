@@ -39,6 +39,9 @@ textarea:focus {
   outline: none;
   border: 1px #F16027 solid;
 }
+input, textarea {
+  font-size: 0.8em;
+}
 
 #original-language {
   height: 38px;
@@ -315,5 +318,6 @@ body.processing #indicator {
   .buttons button {
     margin: 0 10px;
     margin-bottom: 20px;
+    background-color: #fff;
   }
 }
