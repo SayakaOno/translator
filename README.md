@@ -1,2 +1,2 @@
-# translator-converter
-[Demo](http://sayaka38.minibird.jp/utf16generater/index.php)
+# Translator
+[Demo](http://sayaka38.minibird.jp/utf16generator/index.php)
