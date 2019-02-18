@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b0ef21e60e703d0301883fc36386ac7",
+    "content-hash": "b66cda977e992e812e8fb5d8ea51ecc3",
     "packages": [
         {
             "name": "statickidz/php-google-translate-free",
@@ -72,6 +72,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-mbstring": "*"
+    },
     "platform-dev": []
 }
