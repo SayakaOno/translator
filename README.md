@@ -1,7 +1,6 @@
 # Translator
 ![translator1](https://user-images.githubusercontent.com/33141219/53115577-707a2700-34fb-11e9-8611-e10fbbbb0850.gif)<br/>
-Translator is a web application that translates the given word into multiple languages and formats them to JSON. In order to prevent from mojibake when database is used, the given word is converted to UTF-16.<br/>
-[DEMO](https://translator-81.herokuapp.com)
+Translator is a web application that translates the given word into multiple languages and formats them to JSON. In order to prevent from mojibake when database is used, the given word is converted to UTF-16.
 
 ## How to use
 - Type a word you want to translate
